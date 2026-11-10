@@ -7,7 +7,10 @@ Grafik, Schrift und Klang werden komplett im Code erzeugt.
 
 ## Starten
 
-`index.html` im Browser öffnen (Doppelklick genügt, kein Server nötig). Am besten mit Kopfhörern und im Dunkeln.
+**`grauwald.html`** herunterladen und im Browser öffnen – fertig. Das ist das komplette Spiel in einer einzigen Datei
+(PC mit Tastatur oder Handy/Tablet mit Touch-Steuerung). Am besten mit Kopfhörern und im Dunkeln.
+
+Für die Entwicklung: `index.html` lädt die einzelnen Dateien aus `js/`. `node tools/build.js` erzeugt daraus neu `grauwald.html`.
 
 ## Worum es geht
 

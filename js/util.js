@@ -120,7 +120,11 @@ const Input = {
     window.addEventListener('keyup', (e) => { this.keys[e.code] = false; });
     window.addEventListener('blur', () => { this.keys = {}; });
     window.addEventListener('mousedown', () => { this.any = true; this.click = true; });
+    window.addEventListener('touchstart', () => { this.any = true; }, { passive: true });
   },
+  // für Touch-Steuerung
+  press(code) { if (!this.keys[code]) { this.hitK[code] = true; this.any = true; } this.navK[code] = true; this.keys[code] = true; },
+  release(code) { this.keys[code] = false; },
   held(a) { return this.bind[a].some((k) => this.keys[k]); },
   hit(a) { return this.bind[a].some((k) => this.hitK[k]); },
   nav(a) { return this.bind[a].some((k) => this.navK[k]); },

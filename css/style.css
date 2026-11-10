@@ -1,9 +1,22 @@
+:root {
+  --bg: #050407;
+  --btn: rgba(30, 26, 36, 0.55);
+  --btn-on: rgba(232, 196, 106, 0.45);
+  --btn-line: rgba(141, 127, 102, 0.6);
+  --btn-text: #d8cfb8;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #050407; } }
+:root[data-theme="dark"] { --bg: #050407; }
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #050407;
+  background: var(--bg);
   overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 #wrap {
   position: fixed;
@@ -12,10 +25,54 @@ html, body {
   align-items: center;
   justify-content: center;
 }
+body.touch #wrap { align-items: flex-start; padding-top: 4px; }
+@media (orientation: landscape) { body.touch #wrap { align-items: center; padding-top: 0; } }
 #screen {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  background: #050407;
+  background: var(--bg);
   outline: none;
 }
 body.playing { cursor: none; }
+
+/* Touch-Steuerung */
+#touch { position: fixed; inset: 0; pointer-events: none; z-index: 5; font-family: monospace; }
+#touch button {
+  pointer-events: auto;
+  background: var(--btn);
+  color: var(--btn-text);
+  border: 2px solid var(--btn-line);
+  border-radius: 6px;
+  font: bold 13px monospace;
+  padding: 0;
+  touch-action: none;
+}
+#touch button.on { background: var(--btn-on); }
+#stick {
+  pointer-events: auto;
+  position: absolute; left: 22px; bottom: 26px;
+  width: 132px; height: 132px; border-radius: 50%;
+  background: var(--btn); border: 2px solid var(--btn-line);
+  touch-action: none;
+}
+#knob {
+  position: absolute; left: 50%; top: 50%;
+  width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%;
+  background: rgba(216, 207, 184, 0.35); border: 2px solid var(--btn-line);
+}
+#tbtns {
+  position: absolute; right: 16px; bottom: 46px;
+  display: grid; grid-template-columns: 64px 64px; gap: 10px;
+}
+#tbtns button { height: 50px; }
+#tbtns button.big { grid-column: span 2; height: 64px; font-size: 22px; }
+#ttop {
+  position: absolute; left: 50%; transform: translateX(-50%); bottom: 4px;
+  display: flex; gap: 6px;
+}
+#ttop button { width: 58px; height: 30px; font-size: 11px; }
+@media (orientation: landscape) {
+  #ttop { top: 6px; bottom: auto; left: auto; right: 10px; transform: none; }
+  #stick { width: 116px; height: 116px; bottom: 16px; }
+  #tbtns { bottom: 12px; }
+}

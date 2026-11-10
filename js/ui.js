@@ -94,7 +94,7 @@ const UI = (function () {
   }
   function hud(ctx, game) {
     const p = game.player;
-    const x = 6, y = VIEW_H - 30;
+    const x = 6, y = (typeof Touch !== 'undefined' && Touch.isTouch) ? 6 : VIEW_H - 30;
     ctx.globalAlpha = game.hudAlpha;
     R(ctx, x - 2, y - 3, 76, 30, 'rgba(6,5,9,0.55)');
     ctx.drawImage(HUD_ICONS.heart, x, y);

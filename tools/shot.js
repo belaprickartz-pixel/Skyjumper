@@ -8,7 +8,7 @@ const path = require('path');
   const errs = [];
   page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errs.push(m.type() + ': ' + m.text()); });
   page.on('pageerror', (e) => errs.push('pageerror: ' + e.message + '\n' + e.stack));
-  await page.goto('file://' + path.join(__dirname, '..', 'index.html'));
+  await page.goto('file://' + path.join(__dirname, '..', process.env.PAGE || 'index.html'));
   await page.waitForTimeout(500);
   const shot = async (n) => { await page.screenshot({ path: path.join(out, n + '.png') }); };
   await shot('00_boot');
